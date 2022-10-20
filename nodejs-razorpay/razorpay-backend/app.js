@@ -1,12 +1,23 @@
-const express = require("express");
-const path = require("path");
-const Razorpay = require("razorpay");
-const shortid = require("shortid");
-const bodyParser = require("body-parser");
-const crypto = require("crypto");
-const cors = require("cors");
+// const express = require("express");
+// const path = require("path");
+// const Razorpay = require("razorpay");
+// const shortid = require("shortid");
+// const bodyParser = require("body-parser");
+// const crypto = require("crypto");
+// const cors = require("cors");
 
-require("dotenv").config();
+import express from "express";
+import url from "url";
+import Razorpay from "razorpay";
+import shortid from "shortid"
+import bodyParser from "body-parser";
+import crypto from "crypto"
+import cors from "cors"
+
+const __dirname = url.fileURLToPath(new URL('.',import.meta.url))
+
+import * as dotenv from "dotenv";
+dotenv.config()
 
 const app = express();
 
@@ -19,7 +30,7 @@ var razorpay = new Razorpay({
 });
 
 app.get("/logo.svg", (req, res) => {
-  res.sendFile(path.join(__dirname, "logo.svg"));
+  res.sendFile(__dirname, "logo.svg");
 });
 
 app.post("/verification", (req, res) => {

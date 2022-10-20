@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 
+
+//..
 function loadScript(src) {
   return new Promise((resolve) => {
     const script = document.createElement("script");
@@ -14,9 +16,14 @@ function loadScript(src) {
     document.body.appendChild(script);
   });
 }
+//..
 
-function App() {
-  async function showRazorpay() {
+function App(){
+// use this code inside function form 
+//..
+
+  async function showRazorpay(e) {
+    e.preventDefault()
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -33,7 +40,7 @@ function App() {
     console.log(data);
 
     const options = {
-      key: "rzp_test_0tpemkHKm5K1Bc",
+      key: "rzp_test_F2aO48FFkQUsX0",
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.id,
@@ -56,6 +63,8 @@ function App() {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
+//..
+
 
   return (
     <div className="App">
@@ -63,7 +72,9 @@ function App() {
         <p>Razorpay payment portal ezzzz</p>
         <a
           className="App-link"
-          onClick={showRazorpay}
+          //..
+          onClick={(()=> showRazorpay())}
+          //..
           target="_blank"
           rel="noopener noreferrer"
         >
